@@ -4,7 +4,7 @@ std::string Entry::getDirection(){return this->direction;}
 char Entry::getChar(){return this->c;}
 void Entry::setVal(int n){this->val = n;}
 void Entry::setDirection(std::string s){this->direction = s;}
-void Entry::setChar(char letter){
+void Entry::setChar(char& letter){
   this->c = letter;
 }
 Entry::Entry(){

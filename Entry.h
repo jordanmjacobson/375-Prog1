@@ -13,6 +13,6 @@ public:
   Entry();
   void setDirection(std::string);
   char getChar();
-  void setChar(char);
+  void setChar(char&);
 };
 #endif
