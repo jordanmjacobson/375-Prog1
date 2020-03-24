@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
   xfile.close();
   yfile.close();
   int test = lcs_length(x,y,my_str);
-  //cout<<my_str<<endl;
+  cout<<my_str<<endl;
   cout<<endl<<"Length: "<<test<<endl;
   return 0;
 }
@@ -40,7 +40,7 @@ int lcs_length(string s, string t, string &u){
   int t_index;
   //vector<vector<Entry>> matrix;
   Entry matrix[s.length()+1][t.length()+1];
-  u = "test";
+  u = "";
   /*for (unsigned long i = 0; i<s.length();i++){
     matrix[i][0].setVal(0);
     for (unsigned long j = 0; j<t.length();j++){
@@ -53,9 +53,9 @@ int lcs_length(string s, string t, string &u){
   }*/
   //matrix - normal index, strings are minus 1
   //
-  time_t begin;
-  time_t end;
-  time(&begin);
+  //time_t begin;
+  //time_t end;
+  //time(&begin);
   /*for (unsigned long i = -1; i<s.length()+1;i++){
     for(unsigned long j = -1; j<t.length()+1;j++){
       if (i == -1 || j == -1){
@@ -78,26 +78,59 @@ int lcs_length(string s, string t, string &u){
     }
     //cout<<endl;
   }*/
-  for (unsigned long i = 0; i<s.length();i++){
-    for (unsigned long j=0; j<t.length();j++){
-      if(i==0||j==0){
-        matrix[i][j] = 0;
-        continue;
+  for(unsigned long i = 0; i<s.length();i++){
+      matrix[i][0].setVal(0);
+  }
+  for(unsigned long j = 0; j<t.length();j++){
+    matrix[0][j].setVal(0);
+  }
+  for (unsigned long i = 1; i<s.length()+1;i++){
+    for (unsigned long j=1; j<t.length()+1;j++){
+      matrix[i][j].setDirection("none");
+      if(s.at(i-1) == t.at(j-1)){
+        matrix[i][j].setVal(matrix[i-1][j-1].getVal()+1);
+        matrix[i][j].setDirection("diagonal");
+        matrix[i][j].setChar(s.at(i-1));
       }
+      else if(matrix[i-1][j].getVal()>=matrix[i][j-1].getVal()){
+        matrix[i][j].setVal(matrix[i-1][j].getVal());
+        matrix[i][j].setDirection("up");
+      }
+      else if (matrix[i-1][j].getVal()<matrix[i][j-1].getVal()) {
+        matrix[i][j].setVal(matrix[i][j-1].getVal());
+        matrix[i][j].setDirection("left");
+      }
+      //cout<<"i: "<<i<<" j: "<<j<<endl;
     }
   }
-  time(&end);
-  double elapsed_time = difftime(end,begin);
-  cout<<"Time: "<<elapsed_time<<" seconds"<<endl;
-  for (unsigned long i = 0; i<s.length(); i++){
-    for(unsigned long j = 0; j<t.length();j++){
+  //time(&end);
+  //double elapsed_time = difftime(end,begin);
+  //cout<<"Time: "<<elapsed_time<<" seconds"<<endl;
+  for (unsigned long i = 0; i<s.length()+1; i++){
+    for(unsigned long j = 0; j<t.length()+1;j++){
       cout<<matrix[i][j].getVal()<<" ";
     }
     cout<<endl;
   }
-  s_index = s.length()-1;
-  t_index = t.length()-1;
+  s_index = s.length();
+  t_index = t.length();
   retVal+=matrix[s_index][t_index].getVal();
+  Entry current  = matrix[s_index][t_index];
+  while (current.getDirection() != "none"){
+    if (current.getDirection() == "diagonal"){
+      u.insert(0,current.getChar());
+      current = matrix[s_index-1][t_index-1];
+      continue;
+    }
+    else if(current.getDirection() == "up"){
+      current = matrix[s_index-1][t_index];
+      continue;
+    }
+    else if(current.getDirection() == "left"){
+      current = matrix[s_index][t_index-1];
+      continue;
+    }
+  }
   //cout<<"got to this point";
   return retVal;
 }
