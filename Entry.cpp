@@ -9,5 +9,5 @@ void Entry::setChar(char& letter){
 }
 Entry::Entry(){
   this->val = 0;
-  this->direction = "none";
+  this->direction = "n";
 }

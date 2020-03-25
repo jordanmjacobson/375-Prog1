@@ -90,19 +90,19 @@ int lcs_length(string s, string t){
   }
   for (unsigned long i = 1; i<s.length()+1;i++){
     for (unsigned long j=1; j<t.length()+1;j++){
-      matrix[i][j].setDirection("none");
+      matrix[i][j].setDirection("n");
       if(s.at(i-1) == t.at(j-1)){
         matrix[i][j].setVal(matrix[i-1][j-1].getVal()+1);
-        matrix[i][j].setDirection("diagonal");
+        matrix[i][j].setDirection("d");
         matrix[i][j].setChar(s.at(i-1));
       }
       else if(matrix[i-1][j].getVal()>=matrix[i][j-1].getVal()){
         matrix[i][j].setVal(matrix[i-1][j].getVal());
-        matrix[i][j].setDirection("up");
+        matrix[i][j].setDirection("u");
       }
       else if (matrix[i-1][j].getVal()<matrix[i][j-1].getVal()) {
         matrix[i][j].setVal(matrix[i][j-1].getVal());
-        matrix[i][j].setDirection("left");
+        matrix[i][j].setDirection("l");
       }
       //cout<<"i: "<<i<<" j: "<<j<<endl;
     }
@@ -111,29 +111,34 @@ int lcs_length(string s, string t){
   //double elapsed_time = difftime(end,begin);
   //cout<<"Time: "<<elapsed_time<<" seconds"<<endl;
   //cout<<"got to this point";
+  //cout<<"debug";
+  //cout<<s.length()<<endl;
+  //cout<<t.length()<<endl;
   for (unsigned long i = 0; i<s.length()+1; i++){
     for(unsigned long j = 0; j<t.length()+1;j++){
-      cout<<matrix[i][j].getVal()<<" ";
+      cout<<matrix[i][j].getVal()<<","<<matrix[i][j].getDirection()<<" ";
     }
     cout<<endl;
+    //cout<<i<<","<<endl;
   }
-  cout<<"got to this point";
+  cout<<"got to this point 1 ";
   s_index = s.length();
   t_index = t.length();
   retVal+=matrix[s_index][t_index].getVal();
+  cout<<"got to this point 2";
   Entry current  = matrix[s_index][t_index];
-  cout<<"got to this point";
-  while (current.getDirection() != "none"){
-    if (current.getDirection() == "diagonal"){
+  cout<<"got to this point 3";
+  while (current.getDirection() != "n"){
+    if (current.getDirection() == "d"){
       //my_str.push_back(current.getChar());
       current = matrix[s_index-1][t_index-1];
       continue;
     }
-    else if(current.getDirection() == "up"){
+    else if(current.getDirection() == "u"){
       current = matrix[s_index-1][t_index];
       continue;
     }
-    else if(current.getDirection() == "left"){
+    else if(current.getDirection() == "l"){
       current = matrix[s_index][t_index-1];
       continue;
     }
