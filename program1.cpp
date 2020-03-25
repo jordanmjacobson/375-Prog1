@@ -118,7 +118,7 @@ int lcs_length(string s, string t, string &u){
   Entry current  = matrix[s_index][t_index];
   while (current.getDirection() != "none"){
     if (current.getDirection() == "diagonal"){
-      u.insert(0,current.getChar());
+      u.insert(0,(const char *)current.getChar());
       current = matrix[s_index-1][t_index-1];
       continue;
     }
