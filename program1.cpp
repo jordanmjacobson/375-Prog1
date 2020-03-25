@@ -31,8 +31,9 @@ int main(int argc, char *argv[]) {
   xfile.close();
   yfile.close();
   int test = lcs_length(x,y);
-  for (int i = 0;i<my_str.size();i++){
-    cout<<my_str[i]<<endl;
+
+  for (int i = my_str.size()-1;i>=0;i--){
+    cout<<my_str[i];
   }
 
   cout<<endl<<"Length: "<<test<<endl;
@@ -121,28 +122,32 @@ int lcs_length(string s, string t){
     cout<<endl;
     //cout<<i<<","<<endl;
   }
-  cout<<"got to this point 1 ";
+  //cout<<"got to this point 1 ";
   s_index = s.length();
   t_index = t.length();
   retVal+=matrix[s_index][t_index].getVal();
-  cout<<"got to this point 2";
+  //cout<<"got to this point 2";
   Entry current  = matrix[s_index][t_index];
-  cout<<"got to this point 3";
+  //cout<<"got to this point 3";
   while (current.getDirection() != "n"){
     if (current.getDirection() == "d"){
-      //my_str.push_back(current.getChar());
+      my_str.push_back(current.getChar());
       current = matrix[s_index-1][t_index-1];
+      s_index--;
+      t_index--;
       continue;
     }
     else if(current.getDirection() == "u"){
       current = matrix[s_index-1][t_index];
+      s_index--;
       continue;
     }
     else if(current.getDirection() == "l"){
       current = matrix[s_index][t_index-1];
+      t_index--;
       continue;
     }
   }
-  cout<<"got to this point";
+  //cout<<"got to this point";
   return retVal;
 }
