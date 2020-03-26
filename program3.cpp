@@ -5,6 +5,7 @@
 #include<time.h>
 
 using namespace std;
+
 //string my_str;
 int lcs(string,string,int,int);
 void lcs_length(string,string,int,int);
@@ -15,19 +16,21 @@ int main(int argc, char *argv[]) {
   int sizex;
   int sizey;
 
+  ofstream output(argv[3],ofstream::out); //output file
+
   string x; //string from filex
   // Open filex for reading
   ifstream xfile(argv[1]);
   while(xfile >> x) {
   }
-  cout<<"X string: "<<x<<endl;
+  //cout<<"X string: "<<x<<endl;
   sizex = x.size();
   string y; //string from filey
   //open filey for reading
   ifstream yfile(argv[2]);
   while(yfile >> y){
   }
-  cout<<"Y string: "<<y<<endl;
+  //cout<<"Y string: "<<y<<endl;
   sizey = y.size();
   xfile.close();
   yfile.close();
@@ -36,7 +39,7 @@ int main(int argc, char *argv[]) {
   for (int i = 0;i<sizex;i++){
     matrix[i] = new int[sizey];
   }
-  cout<<"got to this point"<<endl;
+  //cout<<"got to this point"<<endl;
   for (int i=0;i<x.size();i++){
     matrix[i][0] = 0;
   }
@@ -49,7 +52,7 @@ int main(int argc, char *argv[]) {
     }
   }
   lcs_length(x,y,x.size()-1,y.size()-1);
-  cout<<"LCS: "<< matrix[x.size()-1][y.size()-1]<<endl;
+  output<<"LCS: "<< matrix[x.size()-1][y.size()-1]<<endl;
   return 0;
 }
 void lcs_length(string x, string y, int i, int j){

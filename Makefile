@@ -1,10 +1,6 @@
 FLAGS = -Wall -Wextra -DDebug -g -std=c++14
 
-prog1: program1
-
-prog2: program2
-
-prog3: program3
+all: program1 program1 program3
 
 Entry.o: Entry.cpp
 	g++ $(FLAGS) -c Entry.cpp -o Entry.o
@@ -31,11 +27,11 @@ clean:
 	rm -rf program1 program2 program3
 	rm -rf *.o
 
-run1: prog1
+run1: program1
 	./program1 filex.txt filey.txt
 
-run2: prog2
+run2: program2
 	./program2 filex.txt filey.txt
 
-run3: prog3
-	./program3 filex.txt filey.txt
+run3: program3
+	./program3 filex.txt filey.txt output.txt
