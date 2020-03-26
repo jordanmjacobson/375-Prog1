@@ -25,20 +25,19 @@ int main(int argc, char *argv[]) {
   //cout<<"Y string: "<<y<<endl;
   xfile.close();
   yfile.close();
-  auto start = chrono::high_resolution_clock::now();
+  auto start = chrono::high_resolution_clock::now(); //start time
   output<<"Length: "<<lcs(x,y,x.length()-1,y.length()-1)<<endl;
-  auto end = chrono::high_resolution_clock::now();
-  auto elapsed_time = chrono::duration_cast<chrono::microseconds>(end-start).count();
+  auto end = chrono::high_resolution_clock::now(); //end time
+  auto elapsed_time = chrono::duration_cast<chrono::microseconds>(end-start).count();//elapsed time
   output<<"Time: "<<elapsed_time<<" microseconds"<<endl;
   return 0;
   output.close();
 }
-
+//calculates the lcs length using the recursive solution
 int lcs(string x,string y,int i,int j){
   if (i<0||j<0){ //base case
     return 0;
   }
-  //recuresive part
   else if(x.at(i) == y.at(j)){
     return 1+lcs(x,y,i-1,j-1);
   }

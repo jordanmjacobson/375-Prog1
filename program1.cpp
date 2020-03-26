@@ -36,18 +36,19 @@ int main(int argc, char *argv[]) {
   auto elapsed_time = chrono::duration_cast<chrono::microseconds>(end-start).count();
 //since the lcs is created backwards, it will be sent to output backwards, so that
 //it will come out the right way
-  if (x.length()<=10|| y.length()<=10){
+  if (x.length()<=10&& y.length()<=10){
+    output<<"LCS: ";
     for (int i = my_str.size()-1;i>=0;i--){
       output<<my_str[i];
     }
-    cout<<"Time: "<<elapsed_time<<" microseconds"<<endl;;
+    output<<endl<<"Time: "<<elapsed_time<<" microseconds"<<endl;;
   }
 
   else{
     output<<"Length: "<<test<<endl;
     output<<"Time: "<<elapsed_time<<" microseconds"<<endl;
   }
-  output.close();
+  //output.close();
   return 0;
 }
 int lcs_length(string s, string t, char*my_chr){
@@ -108,17 +109,17 @@ int lcs_length(string s, string t, char*my_chr){
     for (unsigned long j=1; j<t.length()+1;j++){
       matrix[i][j].setDirection("n"); //initializes all directions to "n ", or "none"
       if(s.at(i-1) == t.at(j-1)){
-        matrix[i][j].setVal(matrix[i-1][j-1].getVal()+1);
+        matrix[i][j].setVal(matrix[i-1][j-1].getVal()+1);//sets value for one entry up and to the left
         matrix[i][j].setDirection("d");//sets direction to diagonal
-        matrix[i][j].setChar(s.at(i-1));
+        matrix[i][j].setChar(s.at(i-1));//sets the character since it goes diagonally
       }
       else if(matrix[i-1][j].getVal()>=matrix[i][j-1].getVal()){
-        matrix[i][j].setVal(matrix[i-1][j].getVal());
+        matrix[i][j].setVal(matrix[i-1][j].getVal());//sets value at one entry up
         matrix[i][j].setDirection("u");//sets direction to up
       }
       else if (matrix[i-1][j].getVal()<matrix[i][j-1].getVal()) {
-        matrix[i][j].setVal(matrix[i][j-1].getVal());
-        matrix[i][j].setDirection("l");//sets directino fo left
+        matrix[i][j].setVal(matrix[i][j-1].getVal());//sets value one entry to the left
+        matrix[i][j].setDirection("l");//sets directino to left
       }
       //cout<<"i: "<<i<<" j: "<<j<<endl;
     }
@@ -133,12 +134,15 @@ int lcs_length(string s, string t, char*my_chr){
 
   //the following code prints out the table if both inputs are less than or
   //equal to 10 characters long:
-  if (s.length()<=10||t.length()<=10){
+  if (s.length()<=10&&t.length()<=10){
     for (unsigned long i = 0; i<s.length()+1; i++){
       for(unsigned long j = 0; j<t.length()+1;j++){
         output<<matrix[i][j].getVal()<<","<<matrix[i][j].getDirection()<<" ";
+        cout<<matrix[i][j].getVal()<<","<<matrix[i][j].getDirection()<<" ";
+
       }
       output<<endl;
+      cout<<endl;
     }
 
   }

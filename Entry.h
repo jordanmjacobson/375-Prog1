@@ -7,12 +7,12 @@ private:
   std::string direction;
   char c;
 public:
-  int getVal();
-  std::string getDirection();
-  void setVal(int);
-  Entry();
-  void setDirection(std::string);
-  char getChar();
-  void setChar(char&);
+  int getVal(); //returns value
+  std::string getDirection(); //returns direction
+  void setVal(int);//set value
+  Entry();//constructor
+  void setDirection(std::string);//set direction
+  char getChar();//returns character
+  void setChar(char&);//sets character
 };
 #endif
