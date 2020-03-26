@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
       matrix[i][j] = -1;
     }
   }
-  lcs(x,y,x.size()-1,y.size()-1);
+  lcs_length(x,y,x.size()-1,y.size()-1);
   cout<<"LCS: "<< matrix[x.size()-1][y.size()-1]<<endl;
   return 0;
 }
