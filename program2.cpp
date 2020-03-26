@@ -11,13 +11,13 @@ int lcs(string,string,int,int);
 int main(int argc, char *argv[]) {
 
   ofstream output(argv[3],ofstream::out);//output file
-  string x; //strint from filex
+  string x; //string from filex
   // Open filex for reading
   ifstream xfile(argv[1]);
   while(xfile >> x) {
   }
   //cout<<"X string: "<<x<<endl;
-  string y;
+  string y;//string from file y
   //open filey for reading
   ifstream yfile(argv[2]);
   while(yfile >> y){
@@ -35,9 +35,10 @@ int main(int argc, char *argv[]) {
 }
 
 int lcs(string x,string y,int i,int j){
-  if (i<0||j<0){
+  if (i<0||j<0){ //base case
     return 0;
   }
+  //recuresive part
   else if(x.at(i) == y.at(j)){
     return 1+lcs(x,y,i-1,j-1);
   }
