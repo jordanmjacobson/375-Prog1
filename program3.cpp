@@ -63,7 +63,7 @@ int lcs(string x, string y,int i,int j){
     return matrix[i][j];
   }
   if (matrix[i][j]== -1){
-    if (x.at(i-1) == x.at(j-1)){
+    if (x.at(i-1) == y.at(j-1)){
     return 1+ lcs(x,y, i-1,j-1);
     }
     else{
