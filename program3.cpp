@@ -43,8 +43,8 @@ int main(int argc, char *argv[]) {
   for(int j = 0;j<y.size();j++){
     matrix[0][j] = 0;
   }
-  for(int i = 1;i<x.size()+1;i++){
-    for (int j = 1; j<y.size()+1;j++){
+  for(int i = 1;i<x.size();i++){
+    for (int j = 1; j<y.size();j++){
       matrix[i][j] = -1;
     }
   }
