@@ -26,12 +26,12 @@ program3: program3.o
 clean:
 	rm -rf program1 program2 program3
 	rm -rf *.o
-
+	rm -rf output.txt
 run1: program1
-	./program1 filex.txt filey.txt
+	./program1 filex.txt filey.txt output.txt
 
 run2: program2
-	./program2 filex.txt filey.txt
+	./program2 filex.txt filey.txt output.txt
 
 run3: program3
 	./program3 filex.txt filey.txt output.txt

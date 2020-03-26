@@ -51,9 +51,14 @@ int main(int argc, char *argv[]) {
       matrix[i][j] = -1;
     }
   }
+  auto start = chrono::high_resolution_clock::now();
   lcs_length(x,y,x.size()-1,y.size()-1);
-  output<<"LCS: "<< matrix[x.size()-1][y.size()-1]<<endl;
+  auto end = chrono::high_resolution_clock::now();
+  auto elapsed_time = chrono::duration_cast<chrono::microseconds>(end-start).count();
+  output<<"Length: "<< matrix[x.size()-1][y.size()-1]<<endl;
+  output<<"Time: "<<elapsed_time<<" microseconds"<<endl;
   return 0;
+  output.close();
 }
 void lcs_length(string x, string y, int i, int j){
   matrix[i][j] = lcs(x,y,i,j);

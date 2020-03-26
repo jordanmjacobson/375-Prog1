@@ -1,6 +1,3 @@
-/* Example
- * Parsing Branch Traces
- */
 
 #include<iostream>
 #include<fstream>
@@ -12,23 +9,29 @@ using namespace std;
 //string my_str;
 int lcs(string,string,int,int);
 int main(int argc, char *argv[]) {
-   //longest common subsequence
-  string x;
+
+  ofstream output(argv[3],ofstream::out);//output file
+  string x; //strint from filex
   // Open filex for reading
   ifstream xfile(argv[1]);
   while(xfile >> x) {
   }
-  cout<<"X string: "<<x<<endl;
+  //cout<<"X string: "<<x<<endl;
   string y;
   //open filey for reading
   ifstream yfile(argv[2]);
   while(yfile >> y){
   }
-  cout<<"Y string: "<<y<<endl;
+  //cout<<"Y string: "<<y<<endl;
   xfile.close();
   yfile.close();
-  cout<<"LCS: "<<lcs(x,y,x.length()-1,y.length()-1)<<endl;
+  auto start = chrono::high_resolution_clock::now();
+  output<<"Length: "<<lcs(x,y,x.length()-1,y.length()-1)<<endl;
+  auto end = chrono::high_resolution_clock::now();
+  auto elapsed_time = chrono::duration_cast<chrono::microseconds>(end-start).count();
+  output<<"Time: "<<elapsed_time<<" microseconds"<<endl;
   return 0;
+  output.close();
 }
 
 int lcs(string x,string y,int i,int j){
