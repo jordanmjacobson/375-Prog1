@@ -43,8 +43,8 @@ int main(int argc, char *argv[]) {
   for(int j = 0;j<y.size();j++){
     matrix[0][j] = 0;
   }
-  for(int i = 1;i<x.size()+1;i++){
-    for (int j = 1; j<y.size()+1;j++){
+  for(int i = 1;i<x.size();i++){
+    for (int j = 1; j<y.size();j++){
       matrix[i][j] = -1;
     }
   }
@@ -63,7 +63,7 @@ int lcs(string x, string y,int i,int j){
     return matrix[i][j];
   }
   if (matrix[i][j]== -1){
-    if (x.at(i) == x.at(j)){
+    if (x.at(i-1) == x.at(j-1)){
     return 1+ lcs(x,y, i-1,j-1);
     }
     else{
